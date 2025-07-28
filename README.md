@@ -63,35 +63,45 @@ accent-correction-tool/
 - FFmpeg (for audio processing)
 - espeak-ng (for G2P - install via system package manager)
 
-### Setup
+### Quick Setup
+
+**Option 1: Automated Setup (Recommended)**
+```bash
+git clone https://github.com/KoploNadav/accent-correction-tool.git
+cd accent-correction-tool
+./setup.sh
+```
+
+**Option 2: Manual Setup**
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/accent-correction-tool.git
+git clone https://github.com/KoploNadav/accent-correction-tool.git
 cd accent-correction-tool
 ```
 
-2. Create a virtual environment:
-```bash
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-```
-
-3. Install dependencies:
-```bash
-pip install -r requirements.txt
-```
-
-4. Install system dependencies:
+2. Install system dependencies:
 ```bash
 # On macOS
-brew install ffmpeg espeak-ng
+brew install portaudio espeak-ng ffmpeg
 
 # On Ubuntu/Debian
-sudo apt-get install ffmpeg espeak-ng
+sudo apt-get update
+sudo apt-get install -y ffmpeg espeak-ng portaudio19-dev python3-dev
 
 # On Windows (using chocolatey)
 choco install ffmpeg espeak-ng
+```
+
+3. Create a virtual environment:
+```bash
+python3 -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
+
+4. Install Python dependencies:
+```bash
+pip install -r requirements.txt
 ```
 
 ## Usage
@@ -99,13 +109,24 @@ choco install ffmpeg espeak-ng
 ### Desktop Application
 
 ```bash
-python src/main.py
+# Show help
+python3 src/main.py --help
+
+# Run in desktop mode (default)
+python3 src/main.py --mode desktop --language english
+
+# Run in web mode (future)
+python3 src/main.py --mode web --language english
 ```
 
-### Web Interface (Future)
+### Testing the Installation
 
 ```bash
-python src/web_app.py
+# Run all tests
+python3 -m pytest tests/ -v
+
+# Test specific component
+python3 -m pytest tests/test_config.py -v
 ```
 
 ## Configuration
@@ -171,14 +192,3 @@ mypy src/
 ## License
 
 MIT License - see LICENSE file for details.
-
-## Privacy
-
-This tool processes audio entirely on-device. No raw audio data is stored or transmitted to external servers. Only derived scores and confusion matrices are saved locally for personalization.
-
-## Support
-
-For issues and questions:
-- Create an issue on GitHub
-- Check the documentation in `docs/`
-- Review the configuration options in `config.yaml` 
