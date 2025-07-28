@@ -1,0 +1,121 @@
+# Accent Correction Tool Configuration
+
+# Audio Processing
+audio:
+  sample_rate: 16000
+  chunk_duration: 0.5  # seconds
+  vad_threshold: 0.5
+  silence_threshold: 0.1
+  max_audio_length: 30  # seconds
+
+# Languages and Accents
+languages:
+  english:
+    enabled: true
+    accent: "general_american"
+    phoneme_set: "ipa"
+    g2p_model: "espeak-ng"
+    
+  arabic:
+    enabled: true
+    accent: "palestinian"
+    phoneme_set: "ipa"
+    g2p_model: "espeak-ng"
+    
+  hebrew:
+    enabled: true
+    accent: "modern"
+    phoneme_set: "ipa"
+    g2p_model: "espeak-ng"
+
+# Models Configuration
+models:
+  # Voice Activity Detection
+  vad:
+    model: "silero"
+    model_path: "data/models/silero_vad.onnx"
+    
+  # Acoustic Model (ASR)
+  acoustic:
+    model: "wav2vec2-xlsr-53"  # or "whisper-tiny"
+    model_path: "data/models/wav2vec2-xlsr-53"
+    quantized: true
+    
+  # TTS for reference audio
+  tts:
+    model: "coqui-tts"
+    model_path: "data/models/tts_model"
+    voice: "en_female"
+
+# Scoring and Alignment
+scoring:
+  method: "gop"  # "gop" or "ctc_alignment"
+  threshold: 0.6
+  min_phoneme_duration: 0.05  # seconds
+  confidence_threshold: 0.7
+
+# Feedback Configuration
+feedback:
+  real_time: true
+  latency_target: 300  # milliseconds
+  audio_hints: true
+  articulatory_explanations: true
+  native_exemplars: true
+  visual_feedback: false  # for future web version
+
+# Personalization
+personalization:
+  enabled: true
+  confusion_matrix: true
+  spaced_repetition: true
+  adaptation_rate: 0.1
+  session_history: 100  # sessions to keep
+
+# Error Detection
+error_detection:
+  # Common L1->L2 phoneme confusions
+  english_arabic:
+    - ["θ", "t"]  # th -> t
+    - ["ð", "d"]  # th -> d
+    - ["v", "w"]  # v -> w
+    - ["ɪ", "iː"]  # short i -> long i
+    
+  arabic_english:
+    - ["q", "k"]  # qaf -> k
+    - ["ħ", "h"]  # h -> h
+    - ["ʕ", "ʔ"]  # ayn -> glottal stop
+    
+  hebrew_english:
+    - ["ʁ", "ɹ"]  # uvular r -> alveolar r
+    - ["x", "h"]  # kh -> h
+    - ["ɣ", "g"]  # gh -> g
+
+# User Interface
+ui:
+  mode: "desktop"  # "desktop" or "web"
+  theme: "dark"
+  language: "en"
+  show_phoneme_scores: true
+  show_articulatory_diagrams: false
+
+# Data Storage
+storage:
+  database: "sqlite:///data/user_progress.db"
+  audio_storage: false  # Don't store raw audio
+  scores_storage: true
+  confusion_matrix_storage: true
+  session_logs: true
+
+# Development and Debugging
+debug:
+  verbose: false
+  save_audio_chunks: false
+  log_level: "INFO"
+  profile_performance: false
+
+# Performance
+performance:
+  use_gpu: false
+  num_threads: 4
+  batch_size: 1
+  model_quantization: true 
