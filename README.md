@@ -61,7 +61,7 @@ accent-correction-tool/
 
 - Python 3.8+
 - FFmpeg (for audio processing)
-- espeak-ng (for G2P)
+- espeak-ng (for G2P - install via system package manager)
 
 ### Setup
 
@@ -85,13 +85,13 @@ pip install -r requirements.txt
 4. Install system dependencies:
 ```bash
 # On macOS
-brew install ffmpeg espeak
+brew install ffmpeg espeak-ng
 
 # On Ubuntu/Debian
 sudo apt-get install ffmpeg espeak-ng
 
 # On Windows (using chocolatey)
-choco install ffmpeg espeak
+choco install ffmpeg espeak-ng
 ```
 
 ## Usage

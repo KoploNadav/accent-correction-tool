@@ -4,14 +4,19 @@ Main entry point for the accent correction tool.
 
 import argparse
 import sys
+import os
 from pathlib import Path
 
-from .utils.config import Config
-from .utils.logger import setup_logging, get_logger
-from .audio import AudioProcessor
-from .models import AcousticModel, VADModel
-from .feedback import FeedbackEngine
-from .personalization import PersonalizationEngine
+# Add the project root to the Python path
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from src.utils.config import Config
+from src.utils.logger import setup_logging, get_logger
+from src.audio.processor import AudioProcessor
+from src.models.vad import VADModel
+from src.models.acoustic import AcousticModel
+from src.feedback.engine import FeedbackEngine
+from src.personalization.engine import PersonalizationEngine
 
 
 def main():

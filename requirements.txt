@@ -1,3 +1,8 @@
+# Core dependencies
+numpy>=1.24.0
+scipy>=1.10.0
+pyyaml>=6.0
+
 # Core audio processing
 torch>=2.0.0
 torchaudio>=2.0.0
@@ -12,7 +17,6 @@ accelerate>=0.20.0
 
 # Whisper and related
 openai-whisper>=20231117
-whisper-cpp-python>=0.0.1
 
 # VAD and audio segmentation
 silero-vad>=4.0.0
@@ -20,16 +24,7 @@ webrtcvad>=2.0.10
 
 # Phoneme processing and G2P
 phonemizer>=3.2.1
-espeak-ng>=0.1.0
 g2p-en>=2.1.0
-
-# TTS for reference audio
-TTS>=0.20.0
-coqui-ai-tts>=0.14.0
-
-# Audio alignment and scoring
-torchaudio>=2.0.0
-kaldi-io>=0.9.0
 
 # Web interface (for future web version)
 flask>=2.3.0
@@ -37,9 +32,7 @@ flask-cors>=4.0.0
 websockets>=11.0.0
 
 # Data processing and storage
-numpy>=1.24.0
 pandas>=2.0.0
-sqlite3
 json5>=0.9.0
 
 # Visualization and feedback
@@ -55,12 +48,8 @@ flake8>=6.0.0
 mypy>=1.5.0
 
 # Configuration and logging
-pyyaml>=6.0
 python-dotenv>=1.0.0
 loguru>=0.7.0
-
-# Personalization and spaced repetition
-spaced-repetition>=0.1.0
 
 # Optional: ONNX for model optimization
 onnx>=1.14.0
